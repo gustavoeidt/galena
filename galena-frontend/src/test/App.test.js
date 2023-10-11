@@ -1,12 +1,12 @@
 import React from "react";
 import { render } from "./test-utils";
+import { coursesList } from "./test-mocks";
+import coursesResource from "../api/courses";
 import App from "../App";
 
-test("demo", () => {
-  expect(true).toBe(true);
-});
-
-test("Renders the main page", () => {
-  render(<App />);
-  expect(true).toBeTruthy();
+describe("App", () => {
+  it("should render the main page", async () => {
+    const { getByText } = await render(<App />);
+    expect(getByText("Mestrado em Ciências Biológicas")).toBeInTheDocument();
+  });
 });

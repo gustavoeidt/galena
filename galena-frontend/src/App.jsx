@@ -1,22 +1,26 @@
 import { useQuery } from "@tanstack/react-query";
+import coursesResource from "./api/courses";
+
+function List({ data }) {
+  return (
+    <ul>
+      {data.map((e) => (
+        <li key={crypto.randomUUID()}>{e.name}</li>
+      ))}
+    </ul>
+  );
+}
 
 function App() {
   const { data, isLoading } = useCourses();
 
-  return <div>GALENA</div>;
+  return isLoading ? <div>loading</div> : <List data={data} />;
 }
 
 const useCourses = () => {
   return useQuery({
     queryKey: ["courses"],
-    queryFn: () =>
-      fetch("http://localhost:3000/courses", {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json;charset=UTF-8",
-        },
-      }).then((resp) => resp.json()),
+    queryFn: coursesResource.getCourses,
   });
 };
 
