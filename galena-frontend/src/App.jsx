@@ -1,10 +1,27 @@
-function App() {
+import { useQuery } from "@tanstack/react-query";
 
-  return (
-    <>
-      GALENA
-    </>
-  )
+function App() {
+  const { data, isLoading } = useCourses();
+
+  return <div>GALENA</div>;
 }
 
-export default App
+const useCourses = () => {
+  return useQuery({
+    queryKey: ["courses"],
+    queryFn: () =>
+      fetch("http://localhost:3000/courses", {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json;charset=UTF-8",
+        },
+      }).then((resp) => resp.json()),
+  });
+};
+
+function Loading() {
+  return <h2>🌀 Loading...</h2>;
+}
+
+export default App;
