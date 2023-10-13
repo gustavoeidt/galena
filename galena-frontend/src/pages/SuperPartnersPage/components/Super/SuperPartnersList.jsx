@@ -25,6 +25,23 @@ const SuperPartnersCard = styled(Card)`
     cursor: pointer;
     filter: brightness(85%);
   }
+  & div {
+    display: flex;
+    flex-direction: column;
+  }
+`;
+
+const SuperPartnersLogo = styled.img`
+  display: block;
+  flex-grow: 1;
+  height: 150px;
+  object-fit: contain;
+  object-position: center center;
+  filter: brightness(0) invert(1);
+  @media (min-width: 400px) {
+    max-width: 100px;
+    min-height: 200px;
+  }
 `;
 
 const SuperPartnersTitle = styled(Text)`
@@ -32,15 +49,21 @@ const SuperPartnersTitle = styled(Text)`
 `;
 
 const SuperPartnersList = ({ superPartnersList }) => {
+  console.log(superPartnersList);
   return (
     <Theme>
       <SuperPartnersTitle size="6" align="center" as="h2">
         Super Parceiros
       </SuperPartnersTitle>
       <SuperPartnersListContainer>
-        {superPartnersList.map((partner) => (
+        {superPartnersList.map(({ partner, brand }) => (
           <Link key={crypto.randomUUID()} to={`partner/${partner}`}>
-            <SuperPartnersCard variant="classic">{partner}</SuperPartnersCard>
+            <SuperPartnersCard variant="classic">
+              <SuperPartnersLogo src={brand} />
+              <Text align="center" as="p">
+                {partner}
+              </Text>
+            </SuperPartnersCard>
           </Link>
         ))}
       </SuperPartnersListContainer>

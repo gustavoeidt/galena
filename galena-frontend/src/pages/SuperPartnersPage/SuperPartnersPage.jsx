@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import coursesResource from "../../api/courses";
+import partnersResource from "../../api/partners";
 import { SuperPartnersList } from "./components/Super";
 
 const SuperPartnersPage = () => {
@@ -7,14 +7,14 @@ const SuperPartnersPage = () => {
   return isLoading ? (
     <div>Loading</div>
   ) : (
-    <SuperPartnersList superPartnersList={data.superPartnersList} />
+    <SuperPartnersList superPartnersList={data} />
   );
 };
 
 const useCourses = () => {
   return useQuery({
-    queryKey: ["courses"],
-    queryFn: coursesResource.getCourses,
+    queryKey: ["partners"],
+    queryFn: partnersResource.getPartners,
   });
 };
 
