@@ -39,6 +39,7 @@ const SuperPartnersLogo = styled.img`
   object-position: center center;
   filter: brightness(0) invert(1);
   @media (min-width: 400px) {
+    align-self: center;
     max-width: 100px;
     min-height: 200px;
   }
@@ -46,6 +47,10 @@ const SuperPartnersLogo = styled.img`
 
 const SuperPartnersTitle = styled(Text)`
   margin: 16px;
+`;
+
+const StyledLink = styled(Link)`
+  flex-grow: 1;
 `;
 
 const SuperPartnersList = ({ superPartnersList }) => {
@@ -57,14 +62,14 @@ const SuperPartnersList = ({ superPartnersList }) => {
       </SuperPartnersTitle>
       <SuperPartnersListContainer>
         {superPartnersList.map(({ partner, brand }) => (
-          <Link key={crypto.randomUUID()} to={`partner/${partner}`}>
+          <StyledLink key={crypto.randomUUID()} to={`partner/${partner}`}>
             <SuperPartnersCard variant="classic">
               <SuperPartnersLogo src={brand} />
               <Text align="center" as="p">
                 {partner}
               </Text>
             </SuperPartnersCard>
-          </Link>
+          </StyledLink>
         ))}
       </SuperPartnersListContainer>
     </Theme>
